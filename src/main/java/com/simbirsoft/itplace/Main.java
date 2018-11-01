@@ -11,6 +11,6 @@ public class Main {
     public static void main(String[] args) {
         SummaryService summaryService = new SummaryServiceImpl("person.properties");
         summaryService.createHtmlFile("src/main/webapp/summary.html");
-        log.info("Программа скомпелирована!");
+        log.info("Программа скомпелирована!!!");
     }
 }
