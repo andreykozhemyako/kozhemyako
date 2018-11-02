@@ -7,10 +7,10 @@ import com.simbirsoft.itplace.service.impl.SummaryServiceImpl;
 import org.apache.log4j.Logger;
 
 public class Main {
-    private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
+    private static final Logger log = Logger.getLogger(Main.class);
     public static void main(String[] args) {
         SummaryService summaryService = new SummaryServiceImpl("person.properties");
         summaryService.createHtmlFile("src/main/webapp/summary.html");
-        log.info("Программа скомпелирована!!!");
+        //log.info("Программа скомпелирована!!!");
     }
 }
