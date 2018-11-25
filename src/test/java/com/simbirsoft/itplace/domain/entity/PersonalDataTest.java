@@ -13,6 +13,6 @@ public class PersonalDataTest {
     public void getFIO() {
         PersonRepository repository = new PersonRepositoryFromPropertyFileImpl(getClass().getClassLoader().getResourceAsStream("person.properties"));
         PersonalData data=repository.getPersonalData();
-        assertEquals("Иванов Иван Иванович", data.getFIO());
+        assertEquals("Кожемяко Андрей Эдуардович", data.getFIO());
     }
 }

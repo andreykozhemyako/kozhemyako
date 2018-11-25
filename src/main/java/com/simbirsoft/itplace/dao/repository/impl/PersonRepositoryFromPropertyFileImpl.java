@@ -57,5 +57,6 @@ public class PersonRepositoryFromPropertyFileImpl implements PersonRepository {
             );
         }
         return personalData;
+
     }
 }

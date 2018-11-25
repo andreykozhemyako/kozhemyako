@@ -10,6 +10,9 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class SummaryServiceImpl implements SummaryService {
@@ -18,11 +21,27 @@ public class SummaryServiceImpl implements SummaryService {
     private PersonalData personalData;
     private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
 
-    public SummaryServiceImpl(String propertyFilePath){
+    public SummaryServiceImpl(String propertyFilePath) throws IOException {
         PersonRepository personRepository = new PersonRepositoryFromPropertyFileImpl(
                 getClass().getClassLoader().getResourceAsStream(propertyFilePath)
         );
         this.personalData = personRepository.getPersonalData();
+        this.personalData.readPropertyFile();
+    }
+
+
+    private StringBuilder makeHtmlListFromMap(LinkedHashMap<String,Integer> map){
+
+        StringBuilder str = new StringBuilder("<ol>\n");
+
+
+        for(Map.Entry m : map.entrySet()){
+            str.append("<li>" + m.getKey() + ":" + m.getValue() + "</li>\n");
+        }
+
+        str.append("</ol>\n");
+
+        return str;
     }
 
     @Override
@@ -84,7 +103,7 @@ public class SummaryServiceImpl implements SummaryService {
                     "        <div class=\"card card-block\">\n" +
                     "            <h3 class=\"card-title\"><strong>Навыки:</strong></h3>\n" +
                     "            <ol class=\"card-text\">\n"
-                                    + personalData.getSkills() +
+                                    + makeHtmlListFromMap(personalData.skillsMap) +
                     "            </ol>\n" +
                     "        </div>\n" +
                     "   </div>\n" +
