@@ -25,5 +25,5 @@ public interface PersonPropertyKeys {
 
     String SKILLS = "skills";//скилы
 
-    }
+}
 

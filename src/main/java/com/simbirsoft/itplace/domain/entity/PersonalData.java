@@ -1,15 +1,17 @@
 package com.simbirsoft.itplace.domain.entity;
 
+
+import org.springframework.stereotype.Component;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-import static java.util.Arrays.*;
-
-//Хранилище
+@Component
 public class PersonalData {
-    //Свойства
+
+
     private String FIO;                     //ФИО
     private String DOB;                     //Дата рождения
     private String phone;                   //телефон
@@ -22,10 +24,13 @@ public class PersonalData {
     private String additionalEducations;    //дополнительное образование
     private String skills;                  //скилы
 
-    public Map <String, Integer> skillsMap = new LinkedHashMap <>();
+    private Map<String,Integer> skillsMap = new LinkedHashMap<>();
 
 
-    // примеры кода
+    public PersonalData(){
+
+    }
+
     public PersonalData(String FIO, String DOB, String phone, String email, String skype, String avatar, String target, String experiences, String educations, String additionalEducations, String skills) {
         this.FIO = FIO;
         this.DOB = DOB;
@@ -45,7 +50,7 @@ public class PersonalData {
     public void readPropertyFile() {
         Properties prop = new Properties();
         InputStream input;
-        TreeMap <String, Integer> propvals = new TreeMap <>();
+        //TreeMap <String, Integer> propvals = new TreeMap <>();
         try {
 
             input = PersonalData.class.getResourceAsStream("/person.properties");
@@ -72,6 +77,11 @@ public class PersonalData {
 
 
     }
+    public void makeSplit(){
+
+        readPropertyFile();
+    }
+
 
     public static <K, V extends Comparable <? super V>> Map <K, V> sortByValue(Map <K, V> map) {
         List <Map.Entry <K, V>> list = new LinkedList <>(map.entrySet());
@@ -85,21 +95,16 @@ public class PersonalData {
         for (Map.Entry <K, V> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
-
-
-
-
-
-
     /*private void stringToArray(){
+
 
         String [] skillsArray = skills.split(",");
 
-        sort(skillsArray, new Comparator<String>() {
+        Arrays.sort(skillsArray, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 int s1 = Integer.parseInt(o1.substring(o1.indexOf(":") + 1));
@@ -120,6 +125,15 @@ public class PersonalData {
 
         stringToArray();
     }*/
+
+
+    public Map <String, Integer> getSkillsMap() {
+        return skillsMap;
+    }
+
+    public void setSkillsMap(LinkedHashMap<String, Integer> skillsMap) {
+        this.skillsMap = skillsMap;
+    }
 
 
     public String getFIO() {
@@ -209,5 +223,4 @@ public class PersonalData {
     public void setSkills(String skills) {
         this.skills = skills;
     }
-
 }
