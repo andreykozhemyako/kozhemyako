@@ -30,7 +30,7 @@ public class SummaryServiceImpl implements SummaryService {
     }
 
 
-    private StringBuilder makeHtmlListFromMap(LinkedHashMap<String,Integer> map){
+    private StringBuilder makeHtmlListFromMap(Map <String, Integer> map){
 
         StringBuilder str = new StringBuilder("<ol>\n");
 

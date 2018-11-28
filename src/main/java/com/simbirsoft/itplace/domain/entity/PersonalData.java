@@ -22,7 +22,7 @@ public class PersonalData {
     private String additionalEducations;    //дополнительное образование
     private String skills;                  //скилы
 
-    public LinkedHashMap <String, Integer> skillsMap = new LinkedHashMap <>();
+    public Map <String, Integer> skillsMap = new LinkedHashMap <>();
 
 
     // примеры кода
@@ -42,7 +42,7 @@ public class PersonalData {
     }
 
 
-    public void readPropertyFile()  {
+    public void readPropertyFile() {
         Properties prop = new Properties();
         InputStream input;
         TreeMap <String, Integer> propvals = new TreeMap <>();
@@ -56,10 +56,9 @@ public class PersonalData {
                 String[] elements = strings[i].split(":");
                 skillsMap.put(elements[0], Integer.parseInt(elements[1]));
             }
-            sortByValue(skillsMap);
+            skillsMap=sortByValue(skillsMap);
 
             //System.out.println(MaxPosition(propvals));
-            //System.out.println(propvals);
             //System.out.println("TreeMap generated::" + propvals);
 
 
@@ -86,6 +85,7 @@ public class PersonalData {
         for (Map.Entry <K, V> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
+        System.out.println(result);
         return result;
     }
 
@@ -120,7 +120,6 @@ public class PersonalData {
 
         stringToArray();
     }*/
-
 
 
     public String getFIO() {
