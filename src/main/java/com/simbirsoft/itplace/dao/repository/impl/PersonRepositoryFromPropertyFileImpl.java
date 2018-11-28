@@ -5,6 +5,7 @@ import com.simbirsoft.itplace.dao.repository.PersonRepository;
 import com.simbirsoft.itplace.domain.entity.PersonalData;
 import com.simbirsoft.itplace.service.impl.SummaryServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,13 +14,19 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Properties;
 
+@Component
 public class PersonRepositoryFromPropertyFileImpl implements PersonRepository {
     //Свойство - опыт работы
     private Properties personDataFile;
     private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
-    public PersonRepositoryFromPropertyFileImpl(InputStream configFileInput){
-        this.personDataFile = getProperties(configFileInput);
+    @Override
+    public void openProperty(InputStream InStream){
+        this.personDataFile = getProperties(InStream);
     }
+
+   /* public PersonRepositoryFromPropertyFileImpl(InputStream configFileInput){
+        this.personDataFile = getProperties(configFileInput);
+    }*/
 
     private Properties getProperties(InputStream configFileInput) {
         Properties property = new Properties();
@@ -37,6 +44,8 @@ public class PersonRepositoryFromPropertyFileImpl implements PersonRepository {
         return null;
 
     }
+
+
 
     @Override
     public PersonalData getPersonalData() {

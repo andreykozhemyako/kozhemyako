@@ -6,6 +6,8 @@ import com.simbirsoft.itplace.dao.repository.impl.PersonRepositoryFromPropertyFi
 import com.simbirsoft.itplace.domain.entity.PersonalData;
 import com.simbirsoft.itplace.service.api.SummaryService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,19 +16,19 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
+@Component
 public class SummaryServiceImpl implements SummaryService {
 
-
+    @Autowired
     private PersonalData personalData;
     private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
 
     public SummaryServiceImpl(String propertyFilePath) throws IOException {
-        PersonRepository personRepository = new PersonRepositoryFromPropertyFileImpl(
+        /*PersonRepository personRepository = new PersonRepositoryFromPropertyFileImpl(
                 getClass().getClassLoader().getResourceAsStream(propertyFilePath)
         );
         this.personalData = personRepository.getPersonalData();
-        this.personalData.readPropertyFile();
+        this.personalData.readPropertyFile();*/
     }
 
 
