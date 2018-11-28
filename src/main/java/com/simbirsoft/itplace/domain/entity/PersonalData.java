@@ -24,10 +24,10 @@ public class PersonalData {
     private String additionalEducations;    //дополнительное образование
     private String skills;                  //скилы
 
-    private Map<String,Integer> skillsMap = new LinkedHashMap<>();
+    private Map <String, Integer> skillsMap = new LinkedHashMap <>();
+    public ArrayList <String> expList;
 
-
-    public PersonalData(){
+    public PersonalData() {
 
     }
 
@@ -55,13 +55,14 @@ public class PersonalData {
 
             input = PersonalData.class.getResourceAsStream("/person.properties");
             prop.load(input);
+            expList = new ArrayList <>(Arrays.asList(experiences.split("/")));
             //String Skills = new String(prop.getProperty("skills").getBytes("ISO8859-1"));
             String[] strings = skills.split(", ");
             for (int i = 0; i < strings.length; i++) {
                 String[] elements = strings[i].split(":");
                 skillsMap.put(elements[0], Integer.parseInt(elements[1]));
             }
-            skillsMap=sortByValue(skillsMap);
+            skillsMap = sortByValue(skillsMap);
 
             //System.out.println(MaxPosition(propvals));
             //System.out.println("TreeMap generated::" + propvals);
@@ -77,13 +78,16 @@ public class PersonalData {
 
 
     }
-    public void makeSplit(){
+
+    public void makeSplit() {
 
         readPropertyFile();
     }
 
 
     public static <K, V extends Comparable <? super V>> Map <K, V> sortByValue(Map <K, V> map) {
+
+
         List <Map.Entry <K, V>> list = new LinkedList <>(map.entrySet());
         Collections.sort(list, new Comparator <Map.Entry <K, V>>() {
             @Override
@@ -99,42 +103,22 @@ public class PersonalData {
         return result;
     }
 
-    /*private void stringToArray(){
-
-
-        String [] skillsArray = skills.split(",");
-
-        Arrays.sort(skillsArray, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int s1 = Integer.parseInt(o1.substring(o1.indexOf(":") + 1));
-                int s2 = Integer.parseInt(o2.substring(o2.indexOf(":") + 1));
-                return s2 - s1;
-            }
-        });
-
-        for(String s : skillsArray){
-            String [] tmp = s.split(":");
-            System.out.println(s);
-            skillsMap.put(tmp[0],Integer.parseInt(tmp[1]));
-        }
-
-    }
-
-    public void makeSplit(){
-
-        stringToArray();
-    }*/
-
 
     public Map <String, Integer> getSkillsMap() {
         return skillsMap;
     }
 
-    public void setSkillsMap(LinkedHashMap<String, Integer> skillsMap) {
+    public void setSkillsMap(LinkedHashMap <String, Integer> skillsMap) {
         this.skillsMap = skillsMap;
     }
 
+    public ArrayList <String> getExpList() {
+        return expList;
+    }
+
+    public void setExpList(ArrayList <String> expList) {
+        this.expList = expList;
+    }
 
     public String getFIO() {
         return FIO;

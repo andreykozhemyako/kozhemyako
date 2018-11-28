@@ -30,7 +30,7 @@ public class ResumeController {
         model.addAttribute("SKYPE",data.getSkype());
         model.addAttribute("AVATAR",data.getAvatar());
         model.addAttribute("TARGET",data.getTarget());
-        model.addAttribute("EXP",data.getExperiences());
+        model.addAttribute("EXP",data.getExpList());
         model.addAttribute("EDU",data.getEducations());
         model.addAttribute("ADDEDU",data.getAdditionalEducations());
         model.addAttribute("SKILLS",data.getSkillsMap());
