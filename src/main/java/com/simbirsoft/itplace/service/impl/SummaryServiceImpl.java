@@ -4,6 +4,7 @@ import com.simbirsoft.itplace.Main;
 import com.simbirsoft.itplace.dao.repository.PersonRepository;
 import com.simbirsoft.itplace.dao.repository.impl.PersonRepositoryFromPropertyFileImpl;
 import com.simbirsoft.itplace.domain.entity.PersonalData;
+import com.simbirsoft.itplace.service.api.ServiceInterface;
 import com.simbirsoft.itplace.service.api.SummaryService;
 //import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,30 @@ import java.util.Map;
 public class SummaryServiceImpl implements SummaryService {
 
     @Autowired
+    private ServiceInterface service;
     private PersonalData personalData;
     //private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
 
-    public SummaryServiceImpl(String propertyFilePath) throws IOException {
+    public SummaryServiceImpl()  {
         /*PersonRepository personRepository = new PersonRepositoryFromPropertyFileImpl(
                 getClass().getClassLoader().getResourceAsStream(propertyFilePath)
         );
         this.personalData = personRepository.getPersonalData();
         this.personalData.readPropertyFile();*/
     }
+    private StringBuilder makeHtmlListFromList(ArrayList<String> list){
 
+        StringBuilder str = new StringBuilder("<ol>\n");
+
+
+        for(String s : list){
+            str.append("<li>" + s + "</li>\n");
+        }
+
+        str.append("</ol>\n");
+
+        return str;
+    }
 
     private StringBuilder makeHtmlListFromMap(Map <String, Integer> map){
 
@@ -48,6 +62,8 @@ public class SummaryServiceImpl implements SummaryService {
 
     @Override
     public void createHtmlFile(String pathHtmlFile) {
+        personalData = service.getData("person.properties");
+        personalData.makeSplit();
         if (this.personalData != null){
             String html = "<!DOCTYPE html>\n" +
                     "<html lang=\"ru\">\n" +
@@ -89,7 +105,7 @@ public class SummaryServiceImpl implements SummaryService {
                     "        <div class=\"card card-block\">\n" +
                     "            <h3 class=\"card-title\"><strong>Опыт работы:</strong></h3>\n" +
                     "            <ol class=\"card-text\">\n"
-                                    + personalData.getExperiences() +
+                                    + personalData.getExpList() +
                     "            </ol>\n" +
                     "        </div>\n" +
                     "        <div class=\"card card-block\">\n" +
