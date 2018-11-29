@@ -5,7 +5,7 @@ import com.simbirsoft.itplace.dao.repository.PersonRepository;
 import com.simbirsoft.itplace.dao.repository.impl.PersonRepositoryFromPropertyFileImpl;
 import com.simbirsoft.itplace.domain.entity.PersonalData;
 import com.simbirsoft.itplace.service.api.SummaryService;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class SummaryServiceImpl implements SummaryService {
 
     @Autowired
     private PersonalData personalData;
-    private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
+    //private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
 
     public SummaryServiceImpl(String propertyFilePath) throws IOException {
         /*PersonRepository personRepository = new PersonRepositoryFromPropertyFileImpl(
@@ -121,7 +121,7 @@ public class SummaryServiceImpl implements SummaryService {
                 writer.flush();
             }
             catch(IOException ex){
-                log.info(ex.getLocalizedMessage());
+               // log.info(ex.getLocalizedMessage());
             }
         }
     }

@@ -4,7 +4,7 @@ import com.simbirsoft.itplace.common.constants.PersonPropertyKeys;
 import com.simbirsoft.itplace.dao.repository.PersonRepository;
 import com.simbirsoft.itplace.domain.entity.PersonalData;
 import com.simbirsoft.itplace.service.impl.SummaryServiceImpl;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ import java.util.Properties;
 public class PersonRepositoryFromPropertyFileImpl implements PersonRepository {
     //Свойство - опыт работы
     private Properties personDataFile;
-    private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
+   // private static final Logger log = Logger.getLogger(SummaryServiceImpl.class);
     @Override
     public void openProperty(InputStream InStream){
         this.personDataFile = getProperties(InStream);
@@ -36,10 +36,10 @@ public class PersonRepositoryFromPropertyFileImpl implements PersonRepository {
         } catch (FileNotFoundException e) {
             System.out.println("Не найден файл настроек");
             e.printStackTrace();
-            log.info(e.getLocalizedMessage());
+            //log.info(e.getLocalizedMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            log.info(e.getLocalizedMessage());
+           // log.info(e.getLocalizedMessage());
         }
         return null;
 
