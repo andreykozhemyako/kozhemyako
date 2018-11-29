@@ -105,7 +105,7 @@ public class SummaryServiceImpl implements SummaryService {
                     "        <div class=\"card card-block\">\n" +
                     "            <h3 class=\"card-title\"><strong>Опыт работы:</strong></h3>\n" +
                     "            <ol class=\"card-text\">\n"
-                                    + personalData.getExpList() +
+                                    + makeHtmlListFromList(personalData.getExpList()) +
                     "            </ol>\n" +
                     "        </div>\n" +
                     "        <div class=\"card card-block\">\n" +
