@@ -1,15 +1,17 @@
 package com.simbirsoft.itplace.domain.entity;
 
+
+import org.springframework.stereotype.Component;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-import static java.util.Arrays.*;
-
-//Хранилище
+@Component
 public class PersonalData {
-    //Свойства
+
+
     private String FIO;                     //ФИО
     private String DOB;                     //Дата рождения
     private String phone;                   //телефон
@@ -22,10 +24,13 @@ public class PersonalData {
     private String additionalEducations;    //дополнительное образование
     private String skills;                  //скилы
 
-    public Map <String, Integer> skillsMap = new LinkedHashMap <>();
+    private Map <String, Integer> skillsMap = new LinkedHashMap <>();
+    public ArrayList <String> expList;
 
+    public PersonalData() {
 
-    // примеры кода
+    }
+
     public PersonalData(String FIO, String DOB, String phone, String email, String skype, String avatar, String target, String experiences, String educations, String additionalEducations, String skills) {
         this.FIO = FIO;
         this.DOB = DOB;
@@ -45,18 +50,19 @@ public class PersonalData {
     public void readPropertyFile() {
         Properties prop = new Properties();
         InputStream input;
-        TreeMap <String, Integer> propvals = new TreeMap <>();
+        //TreeMap <String, Integer> propvals = new TreeMap <>();
         try {
 
             input = PersonalData.class.getResourceAsStream("/person.properties");
             prop.load(input);
+            expList = new ArrayList <>(Arrays.asList(experiences.split("/")));
             //String Skills = new String(prop.getProperty("skills").getBytes("ISO8859-1"));
             String[] strings = skills.split(", ");
             for (int i = 0; i < strings.length; i++) {
                 String[] elements = strings[i].split(":");
                 skillsMap.put(elements[0], Integer.parseInt(elements[1]));
             }
-            skillsMap=sortByValue(skillsMap);
+            skillsMap = sortByValue(skillsMap);
 
             //System.out.println(MaxPosition(propvals));
             //System.out.println("TreeMap generated::" + propvals);
@@ -73,7 +79,15 @@ public class PersonalData {
 
     }
 
+    public void makeSplit() {
+
+        readPropertyFile();
+    }
+
+
     public static <K, V extends Comparable <? super V>> Map <K, V> sortByValue(Map <K, V> map) {
+
+
         List <Map.Entry <K, V>> list = new LinkedList <>(map.entrySet());
         Collections.sort(list, new Comparator <Map.Entry <K, V>>() {
             @Override
@@ -85,42 +99,26 @@ public class PersonalData {
         for (Map.Entry <K, V> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
 
-
-
-
-
-
-    /*private void stringToArray(){
-
-        String [] skillsArray = skills.split(",");
-
-        sort(skillsArray, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int s1 = Integer.parseInt(o1.substring(o1.indexOf(":") + 1));
-                int s2 = Integer.parseInt(o2.substring(o2.indexOf(":") + 1));
-                return s2 - s1;
-            }
-        });
-
-        for(String s : skillsArray){
-            String [] tmp = s.split(":");
-            System.out.println(s);
-            skillsMap.put(tmp[0],Integer.parseInt(tmp[1]));
-        }
-
+    public Map <String, Integer> getSkillsMap() {
+        return skillsMap;
     }
 
-    public void makeSplit(){
+    public void setSkillsMap(LinkedHashMap <String, Integer> skillsMap) {
+        this.skillsMap = skillsMap;
+    }
 
-        stringToArray();
-    }*/
+    public ArrayList <String> getExpList() {
+        return expList;
+    }
 
+    public void setExpList(ArrayList <String> expList) {
+        this.expList = expList;
+    }
 
     public String getFIO() {
         return FIO;
@@ -209,5 +207,4 @@ public class PersonalData {
     public void setSkills(String skills) {
         this.skills = skills;
     }
-
 }
