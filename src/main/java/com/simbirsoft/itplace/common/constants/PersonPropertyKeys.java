@@ -4,6 +4,7 @@ package com.simbirsoft.itplace.common.constants;
 public interface PersonPropertyKeys {
 
     String FIO = "FIO";  //ФИО
+    
 
     String DOB = "DOB"; //Дата рождения
 
